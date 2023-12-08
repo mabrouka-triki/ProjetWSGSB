@@ -24,3 +24,8 @@ Route::post('/getConnexion', [App\Http\Controllers\ControllerLogin::class, 'sign
 Route::get('/updatePassword/{pwd}',[\App\Http\Controllers\ControllerLogin::class,'updatePassword']);
 
 Route::post('/login',[AuthController::class,'login']);
+
+
+Route::prefix('frais')->group(function(){
+    Route::get('listeFrais/{id}', 'controllerFrais@getListeFicheFrais');
+});
