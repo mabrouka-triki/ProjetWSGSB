@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\controllerFrais;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,4 @@ Route::get('/updatePassword/{pwd}',[\App\Http\Controllers\ControllerLogin::class
 
 Route::post('/login',[AuthController::class,'login']);
 
-
-Route::prefix('frais')->group(function(){
-    Route::get('listeFrais/{id}', 'controllerFrais@getListeFicheFrais');
-});
+Route::get('/listeFrais/{id_visiteur}',[controllerFrais::class,'getListeFicheFrais']);

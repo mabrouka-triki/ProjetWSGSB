@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class ServiceLogin
 {
-
     public function getConnexion($login_visiteur, $pwd_visiteur)
     {
         $response = null;

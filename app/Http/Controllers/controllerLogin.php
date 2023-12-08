@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\dao\ServiceLogin;
+
 use App\Exceptions\MonException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use App\dao\ServiceFrais;
+
 
 class ControllerLogin
 {
@@ -28,11 +29,11 @@ class ControllerLogin
                     'status' => '415',
                     'message' => 'La requete doit etre de type JSON'
                 );
-                return json_encode($response);  // Ajoutez un point-virgule ici
+                return json_encode($response);
             }
         } catch (MonException $e) {
             $erreur = $e->getMessage();
-            return response()->json($erreur);  // Corrigez cette ligne
+            return response()->json($erreur);
         }
     }
 
@@ -43,7 +44,7 @@ class ControllerLogin
         try {
             $unLogin = new ServiceLogin();
             $unLogin->miseAjourMotPasse($newpwd);
-        return view('home');
+            return view('home');
         } catch (MonException $e) {
             $erreur = $e->getMessage();
             return view('Error', compact('erreur'));
@@ -53,4 +54,7 @@ class ControllerLogin
         }
 
     }
+
 }
+
+
