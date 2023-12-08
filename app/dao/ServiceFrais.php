@@ -23,4 +23,18 @@ class ServiceFrais
         }
     }
 
+    public function insertFrais($anneeMois, $dateModification, $montantValide, $nbJustificatifs, $idVisiteur, $etat){
+
+        try {
+$dateJour=date("Y-m-d");
+ $response = array(
+     'status _message'=> 'Insertion réalisée '
+ );
+            return response();
+        } catch (QueryException $e) {
+
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+
 }

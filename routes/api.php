@@ -28,3 +28,5 @@ Route::get('/updatePassword/{pwd}',[\App\Http\Controllers\ControllerLogin::class
 Route::post('/login',[AuthController::class,'login']);
 
 Route::get('/listeFrais/{id_visiteur}',[controllerFrais::class,'getListeFicheFrais']);
+
+
