@@ -57,15 +57,16 @@ class controllerFrais
             $fraisJson = json_decode($json);
 
             if ($fraisJson != null) {
-                $idfrais=$fraisJson->id_frais;
+                $idfrais = $fraisJson->id_frais;
                 $anneemois = $fraisJson->anneemois;
-                $dateModification = $fraisJson->dateModification;
-                $montantValide = $fraisJson->montantValide;
+                $dateModification = $fraisJson->datemodification;  // Correction ici
+                $montantValide = $fraisJson->montantvalide;  // Correction ici
                 $nbjustificatifs = $fraisJson->nbjustificatifs;
                 $id_visiteur = $fraisJson->id_visiteur;
-                $id_etat = $fraisJson->id_etat;
+                $id_etat = $fraisJson->etat->id_etat;
+
                 $unService = new ServiceFrais();
-                $uneReponse = $unService->updateFrais($idfrais,$anneemois, $dateModification, $montantValide, $nbjustificatifs, $id_visiteur, $id_etat);
+                $uneReponse = $unService->updateFrais($idfrais, $anneemois, $dateModification, $montantValide, $nbjustificatifs, $id_visiteur, $id_etat);
 
                 return response()->json($uneReponse);
             }

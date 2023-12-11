@@ -44,20 +44,20 @@ class ServiceFrais
             throw new MonException($e->getMessage(), 5);
         }
     }
-    public function updateFrais($anneemois, $dateModification, $montantValide, $nbjustificatifs, $id_visiteur, $id_etat)
+    public function updateFrais($idfrais, $anneemois, $dateModification, $montantValide, $nbjustificatifs, $id_visiteur, $id_etat)
     {
         try {
-            DB::table('frais')->insert(
-                [
-
+            DB::table('frais')
+                ->where('id_frais', $idfrais)
+                ->update([
                     'anneemois' => $anneemois,
-                    'nbjustificatifs' => $nbjustificatifs,
                     'datemodification' => $dateModification,
-                    'id_visiteur' => $id_visiteur,
                     'montantvalide' => $montantValide,
+                    'nbjustificatifs' => $nbjustificatifs,
+                    'id_visiteur' => $id_visiteur,
                     'id_etat' => $id_etat,
-                ]
-            );
+                ]);
+
             $response = array('status_message' => 'Modification réalisée');
 
             return $response;
@@ -65,4 +65,5 @@ class ServiceFrais
             throw new MonException($e->getMessage(), 5);
         }
     }
+
 }
