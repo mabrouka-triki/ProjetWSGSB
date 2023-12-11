@@ -1,6 +1,7 @@
 <?php
 
 namespace App\dao;
+
 use App\Models\Frai;
 use App\Exceptions\MonException;
 use Illuminate\Database\QueryException;
@@ -44,6 +45,7 @@ class ServiceFrais
             throw new MonException($e->getMessage(), 5);
         }
     }
+
     public function updateFrais($idfrais, $anneemois, $dateModification, $montantValide, $nbjustificatifs, $id_visiteur, $id_etat)
     {
         try {
@@ -65,5 +67,24 @@ class ServiceFrais
             throw new MonException($e->getMessage(), 5);
         }
     }
+    public function deleteFrais($idfrais)
+    {
+        try {
+            DB::table('frais')
+                ->where('id_frais', $idfrais)
+                ->delete();
+
+            $response = array('status_message' => 'Suppression réalisée');
+
+            return $response;
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+
+
 
 }
+
+
+

@@ -34,3 +34,7 @@ Route::get('/listeFrais/{id_visiteur}',[controllerFrais::class,'getListeFicheFra
 Route::post('/addFicheFrais',[controllerFrais::class,'addFicheFrais']);
 Route::post('/updateFicheFrais',[controllerFrais::class,'updateFicheFrais']);
 
+Route::delete('/suppressionFrais/{id_frais}', [controllerFrais::class, 'suppressionFrais']);
+
+
+

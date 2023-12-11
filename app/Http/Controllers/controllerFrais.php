@@ -75,4 +75,18 @@ class controllerFrais
             return response()->json($erreur, 201);
         }
     }
+
+    public function suppressionFrais($idfrais)
+    {
+        try {
+            $unService = new ServiceFrais();
+            $uneReponse = $unService->deleteFrais($idfrais);
+
+            return response()->json($uneReponse);
+        } catch (MonException $e) {
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 201);
+        }
+    }
+
 }
