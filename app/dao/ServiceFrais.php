@@ -23,18 +23,46 @@ class ServiceFrais
         }
     }
 
-    public function insertFrais($anneeMois, $dateModification, $montantValide, $nbJustificatifs, $idVisiteur, $etat){
-
+    public function insertFrais($anneemois, $dateModification, $montantValide, $nbjustificatifs, $id_visiteur, $id_etat)
+    {
         try {
-$dateJour=date("Y-m-d");
- $response = array(
-     'status _message'=> 'Insertion réalisée '
- );
-            return response();
-        } catch (QueryException $e) {
+            DB::table('frais')->insert(
+                [
+                    'anneemois' => $anneemois,
+                    'nbjustificatifs' => $nbjustificatifs,
+                    'datemodification' => $dateModification,
+                    'id_visiteur' => $id_visiteur,
+                    'montantvalide' => $montantValide,
+                    'id_etat' => $id_etat,
+                ]
+            );
 
+            $response = array('status_message' => 'Insertion réalisée');
+
+            return $response;
+        } catch (QueryException $e) {
             throw new MonException($e->getMessage(), 5);
         }
     }
+    public function updateFrais($anneemois, $dateModification, $montantValide, $nbjustificatifs, $id_visiteur, $id_etat)
+    {
+        try {
+            DB::table('frais')->insert(
+                [
 
+                    'anneemois' => $anneemois,
+                    'nbjustificatifs' => $nbjustificatifs,
+                    'datemodification' => $dateModification,
+                    'id_visiteur' => $id_visiteur,
+                    'montantvalide' => $montantValide,
+                    'id_etat' => $id_etat,
+                ]
+            );
+            $response = array('status_message' => 'Modification réalisée');
+
+            return $response;
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
 }

@@ -22,6 +22,7 @@ class controllerFrais
         }
     }
 
+
     public function addFicheFrais()
     {
         try {
@@ -29,19 +30,19 @@ class controllerFrais
             $fraisJson = json_decode($json);
 
             if ($fraisJson != null) {
-                $anneeMois = $fraisJson->anneemois;
+                $anneemois = $fraisJson->anneemois;
                 $dateModification = $fraisJson->dateModification;
                 $montantValide = $fraisJson->montantValide;
-                $nbJustificatifs = $fraisJson->nbJustificatifs;
-                $idVisiteur = $fraisJson->idVisiteur;
-                $etat = $fraisJson->id_etat;
+                $nbjustificatifs = $fraisJson->nbjustificatifs;
+                $id_visiteur = $fraisJson->id_visiteur;
+                $id_etat = $fraisJson->id_etat;
 
-                $unService = new ServiceFrais($anneeMois, $dateModification, $montantValide, $nbJustificatifs, $idVisiteur, $etat);
+                $unService = new ServiceFrais();
+                $uneReponse = $unService->insertFrais($anneemois, $dateModification, $montantValide, $nbjustificatifs, $id_visiteur, $id_etat);
 
-
-                $response = "un frais est bien ajouté ";
-
-                return response()->json($response);
+                return response()->json($uneReponse);
+            } else {
+                return response()->json('Données manquantes', 400);
             }
         } catch (MonException $e) {
             $erreur = $e->getMessage();
@@ -49,5 +50,28 @@ class controllerFrais
         }
     }
 
-}
+    public function updateFicheFrais()
+    {
+        try {
+            $json = file_get_contents('php://input');
+            $fraisJson = json_decode($json);
 
+            if ($fraisJson != null) {
+                $idfrais=$fraisJson->id_frais;
+                $anneemois = $fraisJson->anneemois;
+                $dateModification = $fraisJson->dateModification;
+                $montantValide = $fraisJson->montantValide;
+                $nbjustificatifs = $fraisJson->nbjustificatifs;
+                $id_visiteur = $fraisJson->id_visiteur;
+                $id_etat = $fraisJson->id_etat;
+                $unService = new ServiceFrais();
+                $uneReponse = $unService->updateFrais($idfrais,$anneemois, $dateModification, $montantValide, $nbjustificatifs, $id_visiteur, $id_etat);
+
+                return response()->json($uneReponse);
+            }
+        } catch (MonException $e) {
+            $erreur = $e->getMessage();
+            return response()->json($erreur, 201);
+        }
+    }
+}

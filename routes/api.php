@@ -30,3 +30,7 @@ Route::post('/login',[AuthController::class,'login']);
 Route::get('/listeFrais/{id_visiteur}',[controllerFrais::class,'getListeFicheFrais']);
 
 
+
+Route::post('/addFicheFrais',[controllerFrais::class,'addFicheFrais']);
+Route::post('/updateFicheFrais',[controllerFrais::class,'updateFicheFrais']);
+
